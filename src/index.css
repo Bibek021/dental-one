@@ -1,0 +1,101 @@
+/* tailwind.css or globals.css (whatever your main CSS file is) */
+
+/* Import all of tailwind */
+@import "tailwindcss";
+
+/* Custom properties and global roots in base layer */
+@layer base {
+  :root {
+    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+    /* Tailwind doesn’t have direct utilities for font-synthesis etc, so plain CSS is fine */
+    line-height: 1.5;
+    font-weight: 400;
+    color-scheme: light dark;
+    color: rgba(255, 255, 255, 0.87);
+    background-color: #242424;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Links */
+  a {
+    /* font-weight: 500 = font-medium in tailwind */
+    @apply font-medium text-[#646cff] no-underline;
+  }
+  a:hover {
+    /* change color on hover */
+    @apply text-[#535bf2];
+  }
+
+  /* Body */
+  body {
+    margin: 0;
+    @apply flex items-center min-w-[320px] min-h-screen;
+  }
+
+  /* Heading h1 */
+  h1 {
+    /* font-size: 3.2em, line-height: 1.1 */
+    font-size: 3.2em;
+    line-height: 1.1;
+  }
+
+  /* Button base */
+  button {
+    @apply rounded-lg border border-transparent px-6 py-2 text-base font-medium bg-[#1a1a1a] cursor-pointer transition-colors;
+  }
+  button:hover {
+    /* border-color on hover */
+    @apply border-[#646cff];
+  }
+  button:focus,
+  button:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+  }
+
+  /* Dark / Light mode switch via prefers-color-scheme */
+  @media (prefers-color-scheme: light) {
+    :root {
+      color: #213547;
+      background-color: #ffffff;
+    }
+    a:hover {
+      @apply text-[#747bff];
+    }
+    button {
+      @apply bg-[#f9f9f9];
+    }
+  }
+}
+
+/* If you have any component-level custom classes, put in components layer */
+@layer components {
+  /* For example, if you want a reusable button variant, you could do: */
+  .btn-custom {
+    @apply rounded-lg border border-transparent px-6 py-2 text-base font-medium bg-[#1a1a1a] cursor-pointer transition-colors;
+  }
+  .btn-custom:hover {
+    @apply border-[#646cff];
+  }
+  .btn-custom:focus,
+  .btn-custom:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+  }
+
+  @media (prefers-color-scheme: light) {
+    .btn-custom {
+      @apply bg-[#f9f9f9];
+    }
+  }
+}
+
+/* If you need new utilities (custom single-purpose classes), use @utility */
+@layer utilities {
+  /* E.g., custom utility for certain text rendering or font smoothing if used frequently */
+  .text-render-optimize {
+    text-rendering: optimizeLegibility;
+  }
+  /* etc */
+}
